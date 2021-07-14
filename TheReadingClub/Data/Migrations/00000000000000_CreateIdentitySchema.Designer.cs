@@ -9,7 +9,7 @@ using TheReadingClub.Data;
 
 namespace TheReadingClub.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(TheReadingClubDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
