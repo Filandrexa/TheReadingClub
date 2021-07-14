@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheReadingClub.Data;
 using TheReadingClub.Services.DBSeeder;
+using TheReadingClub.Services.FormModelServices;
+using TheReadingClub.Services.ViewModelServices;
 
 namespace TheReadingClub
 {
@@ -31,6 +33,9 @@ namespace TheReadingClub
                 .AddEntityFrameworkStores<TheReadingClubDbContext>();
 
             services.AddControllersWithViews();
+
+            services.AddTransient<IBookViewModel, BookViewModel>();
+            services.AddTransient<IAuthorFormModel, AuthorFormModel>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

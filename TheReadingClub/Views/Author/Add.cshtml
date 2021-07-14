@@ -1,0 +1,25 @@
+﻿@model AddAuthorFormModel
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.FirstName"></label>
+        <input asp-for="@Model.FirstName" class="form-control" placeholder="Fist Name">
+        <span asp-validation-for="@Model.FirstName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MiddleName"></label>
+        <input asp-for="@Model.MiddleName" class="form-control" placeholder="Middle Name">
+        <span asp-validation-for="@Model.MiddleName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.LastName"></label>
+        <input asp-for="@Model.LastName" class="form-control" placeholder="Last Name">
+        <span asp-validation-for="@Model.LastName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ImageURL"></label>
+        <input asp-for="@Model.ImageURL" class="form-control" placeholder="Image URL">
+        <span asp-validation-for="@Model.ImageURL" class="small text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
