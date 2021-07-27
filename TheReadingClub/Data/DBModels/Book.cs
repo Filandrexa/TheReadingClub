@@ -30,6 +30,6 @@ namespace TheReadingClub.Data.DBModels
         [Required]
         public string ImageURL { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public int ReleaseYear { get; set; }
     }
 }

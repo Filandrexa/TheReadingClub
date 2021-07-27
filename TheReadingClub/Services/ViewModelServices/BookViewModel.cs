@@ -21,17 +21,17 @@ namespace TheReadingClub.Services.ViewModelServices
                 Id = x.Id,
                 Title = x.Title,
                 AuthorId = x.AuthorId,
-                Author = x.Autor.FirstName + " " + x.Autor.MiddleName + " " + x.Autor.LastName,
+                Author = x.Autor.FullName,
                 Description = x.Description,
                 ImageURL = x.ImageURL,
-                ReleaseDate = x.ReleaseDate,
+                ReleaseYear = x.ReleaseYear,
                 Genres = x.Genres.Select(g => new GenreViewModel
                 {
                     Id = g.Id,
                     Name = g.Name,
                 }).ToList()
             })
-            .OrderBy(d => d.ReleaseDate)
+            .OrderBy(d => d.ReleaseYear)
             .Take(3)
             .ToList();
 

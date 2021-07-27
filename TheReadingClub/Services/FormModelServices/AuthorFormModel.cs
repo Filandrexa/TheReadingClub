@@ -17,9 +17,7 @@ namespace TheReadingClub.Services.FormModelServices
         {
             var authorToAdd = new Author
             {
-                FirstName = author.FirstName,
-                MiddleName = author.MiddleName,
-                LastName = author.LastName,
+                FullName = author.FullName,
                 ImageURL = author.ImageURL,
             };
 

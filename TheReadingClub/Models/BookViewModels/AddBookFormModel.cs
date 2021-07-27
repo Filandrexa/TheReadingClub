@@ -5,21 +5,29 @@ namespace TheReadingClub.Models.BookViewModels
 {
     public class AddBookFormModel
     {
-        public int Id { get; set; }
-
         [Required]
-        [MaxLength(100)]
+        [Display(Name = "Title")]
+        [RegularExpression("[А-Яа-яA-Za-z.]*")]
+        [StringLength(100)]
         public string Title { get; set; }
 
-        public int AuthorId { get; set; }
+        [Required]
+        [Display(Name = "Full Name")]
+        [RegularExpression("[А-Яа-яA-Za-z.]*")]
+        [StringLength(100)]
+        public string Author { get; set; }
 
         [Required]
+        [Display(Name = "Discription")]
         [MaxLength(500)]
         public string Description { get; set; }
 
         [Required]
+        [Url]
         public string ImageURL { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        [Required]
+        [RegularExpression("[0-9]{4}")]
+        public int ReleaseYear { get; set; }
     }
 }

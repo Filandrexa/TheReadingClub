@@ -19,6 +19,6 @@ namespace TheReadingClub.Models.BookViewModels
 
         public string Author { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public int ReleaseYear { get; set; }
     }
 }
