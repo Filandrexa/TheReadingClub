@@ -21,13 +21,12 @@ namespace TheReadingClub.Services.ViewModelServices
                 Id = x.Id,
                 Title = x.Title,
                 AuthorId = x.AuthorId,
-                Author = x.Autor.FullName,
+                Author = x.Author.FullName,
                 Description = x.Description,
                 ImageURL = x.ImageURL,
                 ReleaseYear = x.ReleaseYear,
                 Genres = x.Genres.Select(g => new GenreViewModel
                 {
-                    Id = g.Id,
                     Name = g.Name,
                 }).ToList()
             })

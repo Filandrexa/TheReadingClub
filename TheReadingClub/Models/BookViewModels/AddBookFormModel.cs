@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TheReadingClub.Models.BookViewModels
@@ -29,5 +29,7 @@ namespace TheReadingClub.Models.BookViewModels
         [Required]
         [RegularExpression("[0-9]{4}")]
         public int ReleaseYear { get; set; }
+
+        public ICollection<GenreViewModel> Genres { get; set; }
     }
 }
