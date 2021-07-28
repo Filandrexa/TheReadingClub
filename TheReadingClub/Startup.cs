@@ -35,7 +35,7 @@ namespace TheReadingClub
             services.AddControllersWithViews();
 
             services.AddTransient<IBookViewModel, BookViewModel>();
-            services.AddTransient<IAuthorFormModel, AuthorFormModel>();
+            services.AddTransient<IAuthor, Author>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

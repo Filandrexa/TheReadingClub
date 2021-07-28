@@ -6,7 +6,7 @@ namespace TheReadingClub.Models.AuthorViewModels
     {
         [Required]
         [Display(Name = "Full Name")]
-        [RegularExpression("[А-Яа-яA-Za-z.]*")]
+        [RegularExpression("[A-Za-z ']*")]
         [StringLength(100, MinimumLength = 3)]
         public string FullName { get; set; }
 

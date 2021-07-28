@@ -1,0 +1,16 @@
+﻿@model List<AuthorsViewModel>
+
+@foreach (var author in Model)
+{
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@author.ImageURL" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@author.FullName</h5>
+                @foreach (var book in author.Books)
+                {
+                    <a asp-controller="Book" asp-action="View" asp-route-id="@book.Id" class="btn btn-primary">@book.Title</a>
+                }
+            </div>
+        </div>
+}
+
