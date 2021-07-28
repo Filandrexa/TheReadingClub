@@ -1,0 +1,21 @@
+﻿@model AuthorViewModel
+
+<div class="card mb-2">
+    <img class="card-img-top" src="@Model.ImageURL" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FullName - Published books: @Model.Books.Count()</h5>
+        @foreach (var book in Model.Books)
+        {
+    <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">
+        @book.Title
+        <div>
+            Genres:
+            @foreach (var genre in book.Genre)
+            {
+                @genre
+            }
+        </div>
+    </a>
+        }
+    </div>
+</div>

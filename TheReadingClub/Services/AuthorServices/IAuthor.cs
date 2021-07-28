@@ -9,5 +9,7 @@ namespace TheReadingClub.Services.FormModelServices
         public void AddAuthorToDB(AddAuthorFormModel author);
 
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel();
+
+        public AuthorViewModel PopulateAuthorViewModel(int id);
     }
 }

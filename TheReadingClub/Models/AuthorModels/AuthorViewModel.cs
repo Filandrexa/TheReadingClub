@@ -2,12 +2,14 @@
 
 namespace TheReadingClub.Models.AuthorModels
 {
-    public class AuthorsViewModel
+    public class AuthorViewModel
     {
         public int Id { get; set; }
 
         public string FullName { get; set; }
 
-        public int Books { get; set; }
+        public string ImageURL { get; set; }
+
+        public ICollection<AuthorBookViewModel> Books { get; set; }
     }
 }

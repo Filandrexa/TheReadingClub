@@ -29,20 +29,38 @@ namespace TheReadingClub.Services.FormModelServices
 
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel()
         {
-            var authors = data.Authors.Select(x => new AuthorsViewModel
+            var authors = data.Authors
+            .Select(x => new AuthorsViewModel
             {
                 Id = x.Id,
                 FullName = x.FullName,
-                ImageURL = x.ImageURL,
-                Books = x.Books.Select(b=> new AuthorBookViewModel 
-                    {
-                      Id = b.Id,
-                      Title = b.Title,
-                    }).ToList()
+                Books = x.Books.Count(),
             }
-            ).ToList();
+            )
+            .OrderBy(n=> n.FullName)
+            .ToList();
 
             return authors;
+        }
+
+        public AuthorViewModel PopulateAuthorViewModel(int id)
+        {
+            var author = data.Authors.Where(x => x.Id == id)
+                .Select(x => new AuthorViewModel
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    ImageURL = x.ImageURL,
+                    Books = x.Books.Select(b => new AuthorBookViewModel
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Genre = b.Genres.Select(g=> g.Name).ToList(),
+                    }).ToList(),
+                }
+                ).FirstOrDefault();
+
+            return author;
         }
     }
 }
