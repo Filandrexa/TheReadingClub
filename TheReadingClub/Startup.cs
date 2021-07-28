@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using TheReadingClub.Data;
 using TheReadingClub.Services.DBSeeder;
 using TheReadingClub.Services.FormModelServices;
-using TheReadingClub.Services.ViewModelServices;
 
 namespace TheReadingClub
 {
@@ -34,7 +33,7 @@ namespace TheReadingClub
 
             services.AddControllersWithViews();
 
-            services.AddTransient<IBookViewModel, BookViewModel>();
+            
             services.AddTransient<IAuthor, Author>();
         }
 
