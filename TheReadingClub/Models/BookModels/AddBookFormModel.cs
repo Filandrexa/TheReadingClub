@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TheReadingClub.Models.AuthorModels;
 
 namespace TheReadingClub.Models.BookViewModels
 {
@@ -7,15 +8,19 @@ namespace TheReadingClub.Models.BookViewModels
     {
         [Required]
         [Display(Name = "Title")]
-        [RegularExpression("[А-Яа-яA-Za-z.]*")]
+        [RegularExpression("[А-Яа-яA-Za-z. ']*")]
         [StringLength(100)]
         public string Title { get; set; }
 
         [Required]
         [Display(Name = "Full Name")]
-        [RegularExpression("[А-Яа-яA-Za-z.]*")]
         [StringLength(100)]
-        public string Author { get; set; }
+        public ICollection<AuthorBookSelectFormModel> Author { get; set; }
+
+        [Required]
+        [Display(Name = "Full Name")]
+        [StringLength(100)]
+        public int AuthorId { get; set; }
 
         [Required]
         [Display(Name = "Discription")]
@@ -30,6 +35,7 @@ namespace TheReadingClub.Models.BookViewModels
         [RegularExpression("[0-9]{4}")]
         public int ReleaseYear { get; set; }
 
+        [Required]
         public ICollection<GenreViewModel> Genres { get; set; }
     }
 }

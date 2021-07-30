@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheReadingClub.Data;
+using TheReadingClub.Services.BookServices;
 using TheReadingClub.Services.DBSeeder;
 using TheReadingClub.Services.FormModelServices;
 
@@ -33,8 +34,8 @@ namespace TheReadingClub
 
             services.AddControllersWithViews();
 
-            
-            services.AddTransient<IAuthor, Author>();
+            services.AddTransient<IBookServices, BookServices>();
+            services.AddTransient<IAuthorServices, AuthorServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -6,16 +6,16 @@ using TheReadingClub.Models.AuthorViewModels;
 
 namespace TheReadingClub.Services.FormModelServices
 {
-    public class Author : IAuthor
+    public class AuthorServices : IAuthorServices
     {
         private readonly TheReadingClubDbContext data;
 
-        public Author(TheReadingClubDbContext data)
+        public AuthorServices(TheReadingClubDbContext data)
         {
             this.data = data;
         }
 
-        public void AddAuthorToDB(AddAuthorFormModel author)
+        public bool AddAuthorToDB(AddAuthorFormModel author)
         {
             var authorToAdd = new Data.DBModels.Author
             {
@@ -25,6 +25,7 @@ namespace TheReadingClub.Services.FormModelServices
 
             data.Authors.Add(authorToAdd);
             data.SaveChanges();
+            return true;
         }
 
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel()

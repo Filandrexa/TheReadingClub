@@ -4,9 +4,9 @@ using TheReadingClub.Models.AuthorViewModels;
 
 namespace TheReadingClub.Services.FormModelServices
 {
-    public interface IAuthor
+    public interface IAuthorServices
     {
-        public void AddAuthorToDB(AddAuthorFormModel author);
+        public bool AddAuthorToDB(AddAuthorFormModel author);
 
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel();
 

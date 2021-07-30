@@ -6,9 +6,9 @@ namespace TheReadingClub.Controllers
 {
     public class AuthorController : Controller
     {
-        private readonly IAuthor author;
+        private readonly IAuthorServices author;
 
-        public AuthorController(IAuthor authorFormModel)
+        public AuthorController(IAuthorServices authorFormModel)
         {
             this.author = authorFormModel;
         }
