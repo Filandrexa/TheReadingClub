@@ -31,9 +31,9 @@ namespace TheReadingClub.Services.BookServices
                 ReleaseYear = book.ReleaseYear,
             };
 
-            foreach (var genre in book.Genres)
+            foreach (var genre in book.GenresId)
             {
-                var confirmGenre = data.Genres.Where(x => x.Name == genre.Name).FirstOrDefault();
+                var confirmGenre = data.Genres.Where(x => x.Id == genre).FirstOrDefault();
 
                 if (confirmGenre == null)
                 {

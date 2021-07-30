@@ -6,16 +6,17 @@
         <h5 class="card-title">@Model.FullName - Published books: @Model.Books.Count()</h5>
         @foreach (var book in Model.Books)
         {
-    <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">
-        @book.Title
-        <div>
-            Genres:
-            @foreach (var genre in book.Genre)
-            {
-                @genre
-            }
-        </div>
-    </a>
+            <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">
+             @book.Title
+             </a>
+                <div>
+                    @foreach (var genre in book.Genre)
+                     {
+                        <table>
+                            <tr>@genre</tr>
+                        </table>
+                     }
+                </div>
         }
     </div>
 </div>

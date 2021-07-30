@@ -17,9 +17,7 @@ namespace TheReadingClub.Models.BookViewModels
         [StringLength(100)]
         public ICollection<AuthorBookSelectFormModel> Author { get; set; }
 
-        [Required]
         [Display(Name = "Full Name")]
-        [StringLength(100)]
         public int AuthorId { get; set; }
 
         [Required]
@@ -35,7 +33,10 @@ namespace TheReadingClub.Models.BookViewModels
         [RegularExpression("[0-9]{4}")]
         public int ReleaseYear { get; set; }
 
-        [Required]
+        [Display(Name = "Genres selection")]
+        public ICollection<int> GenresId { get; set; }
+
+        [Display(Name = "Genres selection")]
         public ICollection<GenreViewModel> Genres { get; set; }
     }
 }

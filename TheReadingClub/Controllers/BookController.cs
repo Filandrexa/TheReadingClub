@@ -27,10 +27,18 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddBookFormModel book)
+        public IActionResult Add(AddBookFormModel model)
         {
+            var addBook = service.AddBook(model);
 
-            return null;
+            if (!ModelState.IsValid && !addBook)
+            {
+                model.Genres = data.Genres.Select(x => new GenreViewModel { Id = x.Id, Name = x.Name }).ToList();
+                model.Author = data.Authors.Select(x => new AuthorBookSelectFormModel { Id = x.Id, FullName = x.FullName }).ToList();
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
