@@ -1,6 +1,7 @@
 ﻿@model AuthorViewModel
 
-<div class="row card">
+<div class="container card">
+    <div class="row col-lg-12">
     <img class="card-img-top col-lg-6" src="@Model.ImageURL" alt="Card image cap">
     <div class="card-body col-lg-6">
         <h5 class="card-title">@Model.FullName - Published books: @Model.Books.Count()</h5>
@@ -18,5 +19,6 @@
                      }
                 </div>
         }
+    </div>
     </div>
 </div>

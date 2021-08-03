@@ -43,7 +43,7 @@ namespace TheReadingClub.Controllers
 
         public IActionResult ById(int id)
         {
-            var model = service.BookById(id);
+            var model = bookServices.BookById(id);
 
             return View(model);
         }
