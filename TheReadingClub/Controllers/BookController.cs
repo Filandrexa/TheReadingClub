@@ -9,12 +9,12 @@ namespace TheReadingClub.Controllers
 {
     public class BookController : Controller
     {
-        private readonly IBookServices service;
+        private readonly IBookServices bookServices;
         private readonly TheReadingClubDbContext data;
 
-        public BookController(IBookServices service, TheReadingClubDbContext data)
+        public BookController(IBookServices bookServices, TheReadingClubDbContext data)
         {
-            this.service = service;
+            this.bookServices = bookServices;
             this.data = data;
         }
 
@@ -29,7 +29,7 @@ namespace TheReadingClub.Controllers
         [HttpPost]
         public IActionResult Add(AddBookFormModel model)
         {
-            var addBook = service.AddBook(model);
+            var addBook = bookServices.AddBook(model);
 
             if (!ModelState.IsValid && !addBook)
             {
@@ -39,6 +39,13 @@ namespace TheReadingClub.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ById(int id)
+        {
+            var model = service.BookById(id);
+
+            return View(model);
         }
     }
 }

@@ -6,11 +6,11 @@ namespace TheReadingClub.Controllers
 {
     public class AuthorController : Controller
     {
-        private readonly IAuthorServices author;
+        private readonly IAuthorServices authorServices;
 
-        public AuthorController(IAuthorServices authorFormModel)
+        public AuthorController(IAuthorServices authorServices)
         {
-            this.author = authorFormModel;
+            this.authorServices = authorServices;
         }
 
         public IActionResult Add()
@@ -26,21 +26,21 @@ namespace TheReadingClub.Controllers
                 return View(author);
             }
 
-            this.author.AddAuthorToDB(author);
+            this.authorServices.AddAuthorToDB(author);
 
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult All()
         {
-            var model = this.author.PopulateAuthorsViewModel();
+            var model = this.authorServices.PopulateAuthorsViewModel();
 
             return View(model);
         }
 
         public IActionResult ById(int id)
         {
-            var model = this.author.PopulateAuthorViewModel(id);
+            var model = this.authorServices.PopulateAuthorViewModel(id);
 
             return View(model);
         }

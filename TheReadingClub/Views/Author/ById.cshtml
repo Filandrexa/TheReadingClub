@@ -1,8 +1,8 @@
 ﻿@model AuthorViewModel
 
-<div class="card mb-2">
-    <img class="card-img-top" src="@Model.ImageURL" alt="Card image cap">
-    <div class="card-body">
+<div class="row card">
+    <img class="card-img-top col-lg-6" src="@Model.ImageURL" alt="Card image cap">
+    <div class="card-body col-lg-6">
         <h5 class="card-title">@Model.FullName - Published books: @Model.Books.Count()</h5>
         @foreach (var book in Model.Books)
         {

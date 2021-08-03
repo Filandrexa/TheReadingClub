@@ -1,0 +1,17 @@
+﻿@model BookByIdViewModel
+
+<div class="row card">
+    <img class="card-img-top col-lg-6" src="@Model.ImageURL" alt="Card image cap">
+    <div class="card-body col-lg-6">
+        <h5 class="card-title">@Model.Title writen by <a asp-controller="Author" asp-action="ById" asp-route-id="@Model.AuthorId">@Model.Author</a> published: @Model.ReleaseYear</h5>
+        @foreach (var genre in Model.Genres)
+        {
+            <a asp-controller="Genre" asp-action="ById" asp-route-id="@genre.Id">
+                @genre.Name
+            </a>
+        }
+        <div>
+        <span>@Model.Description</span>
+        </div>
+    </div>
+</div>

@@ -9,5 +9,7 @@ namespace TheReadingClub.Services.BookServices
         public bool AddBook(AddBookFormModel book);
 
         public ICollection<IndexBookViewModel> PopulateIndexBooks();
+
+        public BookByIdViewModel BookById(int id);
     }
 }
