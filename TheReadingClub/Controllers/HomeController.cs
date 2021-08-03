@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheReadingClub.Services.BookServices;
 
 namespace TheReadingClub.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private readonly IBookServices bookService;
 
-        public HomeController()
+        public HomeController(IBookServices bookService)
         {
-            
+            this.bookService = bookService;
         }
 
         public IActionResult Index()
         {
-            
-            return View();
+            var model = bookService.PopulateIndexBooks();
+
+            return View(model);
         }
 
     }

@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TheReadingClub.Data;
+using TheReadingClub.Models.BookModels;
 using TheReadingClub.Models.BookViewModels;
 
 namespace TheReadingClub.Services.BookServices
@@ -46,6 +49,22 @@ namespace TheReadingClub.Services.BookServices
             data.Books.Add(bookToAdd);
             data.SaveChanges();
             return true;
+        }
+
+        public ICollection<IndexBookViewModel> PopulateIndexBooks()
+        {
+            var model = data.Books
+                .OrderByDescending(x => x.Id)
+                .Select(x => new IndexBookViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    ImageURL = x.ImageURL,
+                }
+                ).Take(3)
+                .ToList();
+
+            return model;
         }
     }
 }
