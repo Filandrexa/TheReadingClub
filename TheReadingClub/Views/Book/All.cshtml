@@ -1,0 +1,15 @@
+﻿@model List<AllBooksViewModel>
+
+<div class="container">
+    @foreach (var book in Model)
+    {
+        <div class="card row col-lg-2" style="width: 18rem;">
+            <img class="card-img-top" src="@book.ImageURL" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">
+                    <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">@book.Title</a> - @book.ReleaseYear
+                </p>
+            </div>
+        </div>
+    }
+</div>

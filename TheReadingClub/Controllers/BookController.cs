@@ -47,5 +47,12 @@ namespace TheReadingClub.Controllers
 
             return View(model);
         }
+
+        public IActionResult All()
+        {
+            var model = bookServices.AllBooks();
+
+            return View(model);
+        }
     }
 }

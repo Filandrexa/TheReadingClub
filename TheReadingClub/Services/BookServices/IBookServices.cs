@@ -11,5 +11,7 @@ namespace TheReadingClub.Services.BookServices
         public ICollection<IndexBookViewModel> PopulateIndexBooks();
 
         public BookByIdViewModel BookById(int id);
+
+        public ICollection<AllBooksViewModel> AllBooks();
     }
 }

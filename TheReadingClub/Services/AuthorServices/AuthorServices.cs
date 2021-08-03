@@ -57,7 +57,7 @@ namespace TheReadingClub.Services.FormModelServices
                         Id = b.Id,
                         Title = b.Title,
                         Genre = b.Genres.Select(g=> g.Name).ToList(),
-                    }).ToList(),
+                    }).OrderBy(n=> n.Title).ToList(),
                 }
                 ).FirstOrDefault();
 

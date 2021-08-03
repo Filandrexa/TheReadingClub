@@ -51,6 +51,20 @@ namespace TheReadingClub.Services.BookServices
             return true;
         }
 
+        public ICollection<AllBooksViewModel> AllBooks()
+        {
+            var model = data.Books
+                .Select(x => new AllBooksViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    ImageURL = x.ImageURL,
+                    ReleaseYear = x.ReleaseYear,
+                }).OrderByDescending(x => x.ReleaseYear).ToList();
+
+            return model;
+        }
+
         public BookByIdViewModel BookById(int id)
         {
             var model = data.Books
