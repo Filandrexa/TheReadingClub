@@ -28,6 +28,35 @@ namespace TheReadingClub.Services.FormModelServices
             return true;
         }
 
+        public bool EditAuthor(EditAuthorFormModel model)
+        {
+            var author = data.Authors.Where(x => x.Id == model.Id).FirstOrDefault();
+
+            if (author != null)
+            {
+                author.FullName = model.FullName;
+                author.ImageURL = model.ImageURL;
+                data.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public EditAuthorFormModel GetAuthorFromDb(int id)
+        {
+            var model = data.Authors
+                .Where(x => x.Id == id)
+                .Select(x => new EditAuthorFormModel
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    ImageURL = x.ImageURL,
+                }).FirstOrDefault();
+
+            return model;
+        }
+
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel(string id)
         {
             var authors = data.Authors

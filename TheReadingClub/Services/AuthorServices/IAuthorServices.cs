@@ -11,5 +11,9 @@ namespace TheReadingClub.Services.FormModelServices
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel(string id);
 
         public AuthorViewModel PopulateAuthorViewModel(int id);
+
+        public EditAuthorFormModel GetAuthorFromDb(int id);
+
+        public bool EditAuthor(EditAuthorFormModel model);
     }
 }
