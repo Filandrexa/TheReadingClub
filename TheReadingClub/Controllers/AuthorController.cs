@@ -31,9 +31,9 @@ namespace TheReadingClub.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult All()
+        public IActionResult All(string id)
         {
-            var model = this.authorServices.PopulateAuthorsViewModel();
+            var model = this.authorServices.PopulateAuthorsViewModel(id);
 
             return View(model);
         }

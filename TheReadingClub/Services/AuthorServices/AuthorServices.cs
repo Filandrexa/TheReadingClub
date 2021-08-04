@@ -28,40 +28,40 @@ namespace TheReadingClub.Services.FormModelServices
             return true;
         }
 
-        public ICollection<AuthorsViewModel> PopulateAuthorsViewModel()
+        public ICollection<AuthorsViewModel> PopulateAuthorsViewModel(string id)
         {
             var authors = data.Authors
+            .Where(x => x.FullName.StartsWith(id))
             .Select(x => new AuthorsViewModel
             {
                 Id = x.Id,
                 FullName = x.FullName,
                 Books = x.Books.Count(),
-            }
-            )
+            })
             .OrderBy(n=> n.FullName)
             .ToList();
 
             return authors;
         }
 
-        public AuthorViewModel PopulateAuthorViewModel(int id)
-        {
-            var author = data.Authors.Where(x => x.Id == id)
-                .Select(x => new AuthorViewModel
+    public AuthorViewModel PopulateAuthorViewModel(int id)
+    {
+        var author = data.Authors.Where(x => x.Id == id)
+            .Select(x => new AuthorViewModel
+            {
+                Id = x.Id,
+                FullName = x.FullName,
+                ImageURL = x.ImageURL,
+                Books = x.Books.Select(b => new AuthorBookViewModel
                 {
-                    Id = x.Id,
-                    FullName = x.FullName,
-                    ImageURL = x.ImageURL,
-                    Books = x.Books.Select(b => new AuthorBookViewModel
-                    {
-                        Id = b.Id,
-                        Title = b.Title,
-                        Genre = b.Genres.Select(g=> g.Name).ToList(),
-                    }).OrderBy(n=> n.Title).ToList(),
-                }
-                ).FirstOrDefault();
+                    Id = b.Id,
+                    Title = b.Title,
+                    Genre = b.Genres.Select(g => g.Name).ToList(),
+                }).OrderBy(n => n.Title).ToList(),
+            }
+            ).FirstOrDefault();
 
-            return author;
-        }
+        return author;
     }
+}
 }

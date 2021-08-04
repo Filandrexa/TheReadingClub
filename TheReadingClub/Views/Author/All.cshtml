@@ -1,10 +1,27 @@
 ﻿@model List<AuthorsViewModel>
 
-<div class="list-group col-md-4">
-    @foreach (var author in Model)
-    {
-        <a asp-controller="Author" asp-action="ById" asp-route-id="@author.Id" class="list-group-item">
-            @author.FullName - Published books: @author.Books
-        </a>
-    }
-</div>
+    <div class="container row">
+        <div class="list-group col-lg-4">
+            @if (Model.Count == 0)
+            {
+            <h3>Sorry, no authors found!</h3>
+            }
+            else
+            {
+                foreach (var author in Model)
+                {
+                <a asp-controller="Author" asp-action="ById" asp-route-id="@author.Id" class="list-group-item">
+                    @author.FullName - Published books: @author.Books
+                </a>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="container-fluid row col-lg-12">
+        <partial name="_ContributeToAuthorPartial"/>
+    </div>
+
+    <div class="container-fluid row col-lg-12">
+        <partial name="_AuthorsAlphabeticalPartial"/>
+    </div>

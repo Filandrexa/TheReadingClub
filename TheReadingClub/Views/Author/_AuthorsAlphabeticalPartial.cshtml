@@ -1,0 +1,10 @@
+﻿@{var pages = new List<string> { "Z", "X", "C", "V", "B", "N", "M", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" }; } 
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @foreach (var alphabet in pages)
+        {
+            <li class="page-item"><a class="page-link" asp-controller="Author" asp-action="All" asp-route-id="@alphabet"> @alphabet </a></li>
+        }
+    </ul>
+</nav>
