@@ -1,0 +1,16 @@
+﻿@model GenreByIdViewModel
+
+<div class="container row">
+    <h3>@Model.Name</h3>
+    @foreach (var book in Model.Books)
+    {
+        <div class="card col-lg-2" style="width: 18rem;">
+            <img class="card-img-top" src="@book.ImageURL" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">
+                    <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">@book.Title</a> - @book.ReleaseYear
+                </p>
+            </div>
+        </div>
+    }
+</div>

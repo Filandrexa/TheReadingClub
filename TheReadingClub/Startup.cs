@@ -9,6 +9,7 @@ using TheReadingClub.Data;
 using TheReadingClub.Services.BookServices;
 using TheReadingClub.Services.DBSeeder;
 using TheReadingClub.Services.FormModelServices;
+using TheReadingClub.Services.GenreServices;
 
 namespace TheReadingClub
 {
@@ -36,6 +37,7 @@ namespace TheReadingClub
 
             services.AddTransient<IBookServices, BookServices>();
             services.AddTransient<IAuthorServices, AuthorServices>();
+            services.AddTransient<IGenreServices, GenreServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

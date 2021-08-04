@@ -1,0 +1,12 @@
+﻿@model List<GenreViewModel>
+
+<div class="container row">
+    <div class="list-group col-lg-4">
+            @foreach (var genre in Model)
+            {
+                <a asp-controller="Genre" asp-action="ById" asp-route-id="@genre.Id" class="list-group-item">
+                    @genre.Name - Total books: @genre.BooksCount
+                </a>
+            }
+    </div>
+</div>
