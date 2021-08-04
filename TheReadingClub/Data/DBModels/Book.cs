@@ -23,7 +23,7 @@ namespace TheReadingClub.Data.DBModels
         public ICollection<Genre> Genres { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(5000)]
         public string Description { get; set; }
 
         [Required]
