@@ -2,6 +2,7 @@
 using System.Linq;
 using TheReadingClub.Data;
 using TheReadingClub.Models.AuthorModels;
+using TheReadingClub.Models.BookModels;
 using TheReadingClub.Models.BookViewModels;
 using TheReadingClub.Services.BookServices;
 
@@ -53,6 +54,35 @@ namespace TheReadingClub.Controllers
             var model = bookServices.AllBooks();
 
             return View(model);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var model = bookServices.PopulateEditBookFormModel(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditBookFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Author = data.Authors.Select(a => new AuthorBookSelectFormModel { Id = a.Id, FullName = a.FullName }).ToList();
+                model.Genres = data.Genres.Select(g => new GenreViewModel { Id = g.Id, Name = g.Name }).ToList();
+                return View(model);
+            }
+
+            var success = bookServices.EditBook(model);
+
+            if (!success)
+            {
+                model.Author = data.Authors.Select(a => new AuthorBookSelectFormModel { Id = a.Id, FullName = a.FullName }).ToList();
+                model.Genres = data.Genres.Select(g => new GenreViewModel { Id = g.Id, Name = g.Name }).ToList();
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

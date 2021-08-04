@@ -12,8 +12,9 @@
             </a>
         }
         <div>
-        <span>@Model.Description</span>
+            <span>@Model.Description</span>
         </div>
+        <a class="btn btn-info" role="button" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     </div>
     </div>
 </div>

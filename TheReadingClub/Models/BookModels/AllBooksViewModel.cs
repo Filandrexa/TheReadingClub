@@ -1,4 +1,6 @@
-﻿namespace TheReadingClub.Models.BookModels
+﻿using System.Collections.Generic;
+
+namespace TheReadingClub.Models.BookModels
 {
     public class AllBooksViewModel
     {

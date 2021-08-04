@@ -13,5 +13,9 @@ namespace TheReadingClub.Services.BookServices
         public BookByIdViewModel BookById(int id);
 
         public ICollection<AllBooksViewModel> AllBooks();
+
+        public EditBookFormModel PopulateEditBookFormModel(int id);
+
+        public bool EditBook(EditBookFormModel model);
     }
 }

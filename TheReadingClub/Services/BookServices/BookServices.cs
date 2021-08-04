@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TheReadingClub.Data;
+using TheReadingClub.Models.AuthorModels;
 using TheReadingClub.Models.BookModels;
 using TheReadingClub.Models.BookViewModels;
 
@@ -60,7 +61,7 @@ namespace TheReadingClub.Services.BookServices
                     Title = x.Title,
                     ImageURL = x.ImageURL,
                     ReleaseYear = x.ReleaseYear,
-                }).OrderByDescending(x => x.ReleaseYear).ToList();
+                }).OrderBy(x => x.Title).ToList();
 
             return model;
         }
@@ -84,6 +85,48 @@ namespace TheReadingClub.Services.BookServices
             return model;
         }
 
+        public bool EditBook(EditBookFormModel model)
+        {
+            var book = data.Books.Where(x => x.Id == model.Id).FirstOrDefault();
+
+            if (book != null)
+            {
+                book.Title = model.Title;
+                book.ReleaseYear = model.ReleaseYear;
+                book.ImageURL = model.ImageURL;
+                foreach (var genre in model.GenresId)
+                {
+                    book.Genres = data.Genres.Where(x => x.Id == genre).ToList();
+                }
+                book.Description = model.Description;
+                book.AuthorId = model.AuthorId;
+
+                data.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public EditBookFormModel PopulateEditBookFormModel(int id)
+        {
+            var model = data.Books
+                .Where(x => x.Id == id)
+                .Select(x => new EditBookFormModel
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    ReleaseYear = x.ReleaseYear,
+                    ImageURL = x.ImageURL,
+                    Title = x.Title,
+                }).FirstOrDefault();
+
+            model.Author = data.Authors.Select(a => new AuthorBookSelectFormModel { Id = a.Id, FullName = a.FullName }).ToList();
+            model.Genres = data.Genres.Select(g => new GenreViewModel { Id = g.Id, Name = g.Name }).ToList();
+
+            return model;
+        }
+
         public ICollection<IndexBookViewModel> PopulateIndexBooks()
         {
             var model = data.Books
@@ -94,8 +137,7 @@ namespace TheReadingClub.Services.BookServices
                     Title = x.Title,
                     ImageURL = x.ImageURL,
                 }
-                ).Take(3)
-                .ToList();
+                ).Take(3).ToList();
 
             return model;
         }
