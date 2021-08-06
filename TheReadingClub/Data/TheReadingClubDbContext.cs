@@ -4,7 +4,7 @@ using TheReadingClub.Data.DBModels;
 
 namespace TheReadingClub.Data
 {
-    public class TheReadingClubDbContext : IdentityDbContext
+    public class TheReadingClubDbContext : IdentityDbContext<User>
     {
         public TheReadingClubDbContext(DbContextOptions<TheReadingClubDbContext> options)
             : base(options)

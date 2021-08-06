@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheReadingClub.Data;
+using TheReadingClub.Data.DBModels;
 using TheReadingClub.Services.BookServices;
 using TheReadingClub.Services.DBSeeder;
 using TheReadingClub.Services.FormModelServices;
@@ -29,11 +31,15 @@ namespace TheReadingClub
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>
+            services.AddDefaultIdentity<User>
                 (options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TheReadingClubDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            }); ;
 
             services.AddTransient<IBookServices, BookServices>();
             services.AddTransient<IAuthorServices, AuthorServices>();
@@ -64,8 +70,13 @@ namespace TheReadingClub
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                name: "Areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }
