@@ -1,4 +1,4 @@
-﻿@model EditAuthorFormModel 
+﻿@model EditAuthorFormModel
 
 <form method="post">
     <div class="form-group">
@@ -13,3 +13,7 @@
     </div>
     <button type="submit" class="btn btn-primary" id="@Model.Id">Edit</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
