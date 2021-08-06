@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheReadingClub.Data;
 
 namespace TheReadingClub.Data.Migrations
 {
     [DbContext(typeof(TheReadingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210806095809_AddedUserAndStory")]
+    partial class AddedUserAndStory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,15 +253,13 @@ namespace TheReadingClub.Data.Migrations
                     b.Property<string>("StoryDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Stories");
                 });
@@ -415,11 +415,11 @@ namespace TheReadingClub.Data.Migrations
 
             modelBuilder.Entity("TheReadingClub.Data.DBModels.Story", b =>
                 {
-                    b.HasOne("TheReadingClub.Data.DBModels.User", "User")
+                    b.HasOne("TheReadingClub.Data.DBModels.User", null)
                         .WithMany("Stories")
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("User");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TheReadingClub.Data.DBModels.Author", b =>

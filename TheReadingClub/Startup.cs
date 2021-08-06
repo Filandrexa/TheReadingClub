@@ -32,7 +32,16 @@ namespace TheReadingClub
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<User>
-                (options => options.SignIn.RequireConfirmedAccount = false)
+                (options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.RequireUniqueEmail = true;
+                    options.SignIn.RequireConfirmedPhoneNumber = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TheReadingClubDbContext>();
 

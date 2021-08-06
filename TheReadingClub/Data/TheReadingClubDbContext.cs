@@ -16,5 +16,12 @@ namespace TheReadingClub.Data
         public DbSet<Author> Authors { get; set; }
 
         public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Story> Stories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TheReadingClub.Data;
 using TheReadingClub.Data.DBModels;
 
@@ -12,9 +14,11 @@ namespace TheReadingClub.Services.DBSeeder
     {
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
-            using var scopedService = app.ApplicationServices.CreateScope();
-
-            var data = scopedService.ServiceProvider.GetService<TheReadingClubDbContext>();
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var services = serviceScope.ServiceProvider;
+            var data = services.GetRequiredService<TheReadingClubDbContext>();
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
             data.Database.Migrate();
 
@@ -41,6 +45,8 @@ namespace TheReadingClub.Services.DBSeeder
                 }
                 data.SaveChanges();
             }
+
+            AddAdministrator(roleManager, userManager);
 
             return app;
         }
@@ -260,6 +266,37 @@ namespace TheReadingClub.Services.DBSeeder
             };
 
             return books;
+        }
+
+        private static void AddAdministrator(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        {
+            Task
+                .Run(async () =>
+                {
+                    if (!await roleManager.RoleExistsAsync("Admin"))
+                    {
+                        var role = new IdentityRole { Name = "Admin" };
+
+                        await roleManager.CreateAsync(role);
+                    }
+
+                    
+
+                    if (!userManager.Users.Any(x=> x.UserName == "Administrator"))
+                    {
+                        var user = new User
+                        {
+                            UserName = "Admin@reading.com",
+                            Email = "Admin@reading.com",
+                            FullName = "Administrator",
+                        };
+
+                        await userManager.CreateAsync(user, "admin12");
+                        await userManager.AddToRoleAsync(user, "Admin");
+                    }
+                })
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }
