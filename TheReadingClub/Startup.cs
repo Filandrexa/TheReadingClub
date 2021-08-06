@@ -79,8 +79,8 @@ namespace TheReadingClub
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "Areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "Areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

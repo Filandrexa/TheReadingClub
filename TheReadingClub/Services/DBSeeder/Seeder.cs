@@ -280,7 +280,12 @@ namespace TheReadingClub.Services.DBSeeder
                         await roleManager.CreateAsync(role);
                     }
 
-                    
+                    if (!await roleManager.RoleExistsAsync("Moderator"))
+                    {
+                        var role = new IdentityRole { Name = "Moderator" };
+
+                        await roleManager.CreateAsync(role);
+                    }
 
                     if (!userManager.Users.Any(x=> x.UserName == "Administrator"))
                     {
