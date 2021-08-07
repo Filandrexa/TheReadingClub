@@ -1,1 +1,17 @@
-﻿
+﻿@model List<AllUsersViewModel>
+
+<div class="container row">
+    <div class="list-group col-lg-4">
+        @foreach (var user in Model)
+        {
+        <a asp-controller="Admin" asp-action="ById" asp-route-id="@user.Id" class="list-group-item">
+            @user.FullName - Email: @user.Email
+        </a>
+        }
+    </div>
+</div>
+
+
+<div class="container-fluid row col-lg-12">
+    <partial name="_UsersAlphabeticalPartial" />
+</div>
