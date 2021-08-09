@@ -74,7 +74,7 @@ namespace TheReadingClub.Services.FormModelServices
             return authors;
         }
 
-    public AuthorViewModel PopulateAuthorViewModel(int id)
+        public AuthorViewModel PopulateAuthorViewModel(int id)
     {
         var author = data.Authors.Where(x => x.Id == id)
             .Select(x => new AuthorViewModel
