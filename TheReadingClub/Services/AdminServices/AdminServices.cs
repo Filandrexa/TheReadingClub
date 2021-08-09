@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TheReadingClub.Data;
 using TheReadingClub.Data.DBModels;
 using TheReadingClub.Models.AdminModels;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Services.AdminServices
 {
@@ -46,7 +47,7 @@ namespace TheReadingClub.Services.AdminServices
                 return false;
             }
 
-            Task.Run(async () => await userManager.AddToRoleAsync(user, "Moderator"));
+            Task.Run(async () => await userManager.AddToRoleAsync(user, ModeratorRole));
 
             return true;
         }

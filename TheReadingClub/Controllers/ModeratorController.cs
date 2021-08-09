@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheReadingClub.Services.ModeratorServices;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Controllers
 {
-    [Authorize(Roles ="Moderator, Admin")]
+    [Authorize(Roles = AdminRole)]
+    [Authorize(Roles = ModeratorRole)]
     public class ModeratorController : Controller
     {
         private readonly IModeratorServices moderatorServices;

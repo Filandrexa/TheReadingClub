@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Models.AuthorViewModels
 {
@@ -6,8 +7,8 @@ namespace TheReadingClub.Models.AuthorViewModels
     {
         [Required]
         [Display(Name = "Full Name")]
-        [RegularExpression("[A-Za-z ']*")]
-        [StringLength(100, MinimumLength = 3)]
+        [RegularExpression(AuthorNameRegex)]
+        [StringLength(AuthorNameMaxLenght, MinimumLength = AuthorNameMinLenght)]
         public string FullName { get; set; }
 
         [Required]

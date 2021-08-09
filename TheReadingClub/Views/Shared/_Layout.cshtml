@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using static TheReadingClub.ProjectConstants;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,7 +39,7 @@
                             </li>
                         }
 
-                        @if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
+                        @if (User.IsInRole(ModeratorRole) || User.IsInRole(AdminRole))
                         {
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Moderator" asp-action="AuthorApproval">Pending Author Approval</a>
@@ -47,7 +49,7 @@
                             </li>
                         }
 
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole(AdminRole))
                         {
                             <li>
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="PromoteUser">Admin</a>

@@ -1,23 +1,24 @@
-﻿@model BookByIdViewModel
+﻿@using static TheReadingClub.ProjectConstants;
+@model BookByIdViewModel
 
 <div class="container card">
     <div class="row col-lg-12">
-    <img class="card-img-top col-lg-6" src="@Model.ImageURL" alt="Card image cap">
-    <div class="card-body col-lg-6">
-        <h5 class="card-title">@Model.Title writen by <a asp-controller="Author" asp-action="ById" asp-route-id="@Model.AuthorId">@Model.Author</a> published: @Model.ReleaseYear</h5>
-        @foreach (var genre in Model.Genres)
-        {
-            <a asp-controller="Genre" asp-action="ById" asp-route-id="@genre.Id">
-                @genre.Name
-            </a>
-        }
-        <div>
-            <span>@Model.Description</span>
+        <img class="card-img-top col-lg-6" src="@Model.ImageURL" alt="Card image cap">
+        <div class="card-body col-lg-6">
+            <h5 class="card-title">@Model.Title writen by <a asp-controller="Author" asp-action="ById" asp-route-id="@Model.AuthorId">@Model.Author</a> published: @Model.ReleaseYear</h5>
+            @foreach (var genre in Model.Genres)
+            {
+                <a asp-controller="Genre" asp-action="ById" asp-route-id="@genre.Id">
+                    @genre.Name
+                </a>
+            }
+            <div>
+                <span>@Model.Description</span>
+            </div>
+            @if (User.IsInRole(ModeratorRole) || User.IsInRole(AdminRole))
+            {
+                <a class="btn btn-info" role="button" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            }
         </div>
-        @if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
-        {
-            <a class="btn btn-info" role="button" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        }
-    </div>
     </div>
 </div>

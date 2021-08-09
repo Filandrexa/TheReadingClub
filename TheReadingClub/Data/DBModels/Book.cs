@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Data.DBModels
 {
@@ -13,7 +14,7 @@ namespace TheReadingClub.Data.DBModels
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(BookTitleMaxLenght)]
         public string Title { get; set; }
 
         public int AuthorId { get; set; }
@@ -23,7 +24,7 @@ namespace TheReadingClub.Data.DBModels
         public ICollection<Genre> Genres { get; set; }
 
         [Required]
-        [MaxLength(5000)]
+        [MaxLength(BookDescriptionMaxLenght)]
         public string Description { get; set; }
 
         [Required]

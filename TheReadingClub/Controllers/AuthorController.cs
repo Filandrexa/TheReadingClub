@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheReadingClub.Models.AuthorModels;
 using TheReadingClub.Models.AuthorViewModels;
 using TheReadingClub.Services.FormModelServices;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Controllers
 {
@@ -49,7 +50,8 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
-        [Authorize(Roles ="Admin, Moderator")]
+        [Authorize(Roles = AdminRole)]
+        [Authorize(Roles = ModeratorRole)]
         public IActionResult Edit(int id)
         {
             var model = authorServices.GetAuthorFromDb(id);
@@ -58,7 +60,8 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize(Roles = AdminRole)]
+        [Authorize(Roles = ModeratorRole)]
         public IActionResult Edit(EditAuthorFormModel model)
         {
             if (!ModelState.IsValid)

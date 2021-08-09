@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using TheReadingClub.Models.AuthorModels;
 using TheReadingClub.Models.BookViewModels;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Models.BookModels
 {
@@ -12,8 +13,8 @@ namespace TheReadingClub.Models.BookModels
 
         [Required]
         [Display(Name = "Title")]
-        [RegularExpression("[А-Яа-яA-Za-z. ']*")]
-        [StringLength(100)]
+        [RegularExpression(BookTitleRegex)]
+        [StringLength(BookTitleMaxLenght, MinimumLength = BookTitleMinLenght)]
         public string Title { get; set; }
         
         [Display(Name = "Full Name")]
@@ -24,7 +25,7 @@ namespace TheReadingClub.Models.BookModels
 
         [Required]
         [Display(Name = "Discription")]
-        [MaxLength(5000)]
+        [StringLength(BookDescriptionMaxLenght, MinimumLength = BookDescriptionMinLenght)]
         public string Description { get; set; }
 
         [Required]
@@ -32,7 +33,7 @@ namespace TheReadingClub.Models.BookModels
         public string ImageURL { get; set; }
 
         [Required]
-        [RegularExpression("[0-9]{0,4}")]
+        [RegularExpression(BookYearRegex)]
         public int ReleaseYear { get; set; }
 
         [Display(Name = "Genres selection")]

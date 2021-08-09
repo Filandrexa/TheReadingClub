@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TheReadingClub.Data;
 using TheReadingClub.Data.DBModels;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Services.DBSeeder
 {
@@ -273,31 +274,31 @@ namespace TheReadingClub.Services.DBSeeder
             Task
                 .Run(async () =>
                 {
-                    if (!await roleManager.RoleExistsAsync("Admin"))
+                    if (!await roleManager.RoleExistsAsync(AdminRole))
                     {
-                        var role = new IdentityRole { Name = "Admin" };
+                        var role = new IdentityRole { Name = AdminRole };
 
                         await roleManager.CreateAsync(role);
                     }
 
-                    if (!await roleManager.RoleExistsAsync("Moderator"))
+                    if (!await roleManager.RoleExistsAsync(ModeratorRole))
                     {
-                        var role = new IdentityRole { Name = "Moderator" };
+                        var role = new IdentityRole { Name = ModeratorRole };
 
                         await roleManager.CreateAsync(role);
                     }
 
-                    if (!userManager.Users.Any(x=> x.UserName == "Administrator"))
+                    if (!userManager.Users.Any(x=> x.UserName == AdminFullName))
                     {
                         var user = new User
                         {
-                            UserName = "Admin@reading.com",
-                            Email = "Admin@reading.com",
-                            FullName = "Administrator",
+                            UserName = AdminName,
+                            Email = AdminEmail,
+                            FullName = AdminFullName,
                         };
 
-                        await userManager.CreateAsync(user, "admin12");
-                        await userManager.AddToRoleAsync(user, "Admin");
+                        await userManager.CreateAsync(user, AdminPassword);
+                        await userManager.AddToRoleAsync(user, AdminRole);
                     }
                 })
                 .GetAwaiter()

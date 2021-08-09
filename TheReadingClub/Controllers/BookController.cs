@@ -6,6 +6,7 @@ using TheReadingClub.Models.AuthorModels;
 using TheReadingClub.Models.BookModels;
 using TheReadingClub.Models.BookViewModels;
 using TheReadingClub.Services.BookServices;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Controllers
 {
@@ -59,7 +60,8 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize(Roles = AdminRole)]
+        [Authorize(Roles = ModeratorRole)]
         public IActionResult Edit(int id)
         {
             var model = bookServices.PopulateEditBookFormModel(id);
@@ -68,7 +70,8 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize(Roles = AdminRole)]
+        [Authorize(Roles = ModeratorRole)]
         public IActionResult Edit(EditBookFormModel model)
         {
             if (!ModelState.IsValid)

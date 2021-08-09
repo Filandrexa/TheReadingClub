@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using TheReadingClub.Models.AdminModels;
 using TheReadingClub.Services.AdminServices;
+using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(AdminRole)]
+    [Authorize(Roles = AdminRole)]
     public class AdminController : Controller
     {
         private readonly IAdminServices adminServices;
