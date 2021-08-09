@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TheReadingClub.Data;
 using TheReadingClub.Models.AuthorModels;
@@ -56,6 +57,7 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Edit(int id)
         {
             var model = bookServices.PopulateEditBookFormModel(id);
@@ -64,6 +66,7 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Edit(EditBookFormModel model)
         {
             if (!ModelState.IsValid)

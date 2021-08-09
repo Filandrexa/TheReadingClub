@@ -19,6 +19,10 @@ namespace TheReadingClub.Data
 
         public DbSet<Story> Stories { get; set; }
 
+        public DbSet<AuthorPendingApproval> AuthorPendingApprovals { get; set; }
+
+        public DbSet<BookPendingApproval> BookPendingApprovals { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

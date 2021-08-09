@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheReadingClub.Models.AuthorModels;
 using TheReadingClub.Models.AuthorViewModels;
 using TheReadingClub.Services.FormModelServices;
@@ -27,12 +28,12 @@ namespace TheReadingClub.Controllers
                 return View(author);
             }
 
-            this.authorServices.AddAuthorToDB(author);
+            this.authorServices.AddAuthorToBeApproved(author);
 
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult All(string id)
+        public IActionResult All(string id = "A")
         {
             var model = this.authorServices.PopulateAuthorsViewModel(id);
 
@@ -46,6 +47,7 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
+        [Authorize(Roles ="Admin, Moderator")]
         public IActionResult Edit(int id)
         {
             var model = authorServices.GetAuthorFromDb(id);
@@ -54,6 +56,7 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Edit(EditAuthorFormModel model)
         {
             if (!ModelState.IsValid)

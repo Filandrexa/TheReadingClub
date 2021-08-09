@@ -15,15 +15,15 @@ namespace TheReadingClub.Services.FormModelServices
             this.data = data;
         }
 
-        public bool AddAuthorToDB(AddAuthorFormModel author)
+        public bool AddAuthorToBeApproved(AddAuthorFormModel author)
         {
-            var authorToAdd = new Data.DBModels.Author
+            var authorToAdd = new Data.DBModels.AuthorPendingApproval
             {
                 FullName = author.FullName,
                 ImageURL = author.ImageURL,
             };
 
-            data.Authors.Add(authorToAdd);
+            data.AuthorPendingApprovals.Add(authorToAdd);
             data.SaveChanges();
             return true;
         }
@@ -34,8 +34,9 @@ namespace TheReadingClub.Services.FormModelServices
 
             if (author != null)
             {
-                author.FullName = model.FullName;
-                author.ImageURL = model.ImageURL;
+                var toBeApproved = new Data.DBModels.AuthorPendingApproval
+                {FullName = author.FullName, ImageURL= author.ImageURL };
+                data.AuthorPendingApprovals.Add(toBeApproved);
                 data.SaveChanges();
                 return true;
             }

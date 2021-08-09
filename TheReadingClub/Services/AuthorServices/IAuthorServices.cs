@@ -6,7 +6,7 @@ namespace TheReadingClub.Services.FormModelServices
 {
     public interface IAuthorServices
     {
-        public bool AddAuthorToDB(AddAuthorFormModel author);
+        public bool AddAuthorToBeApproved(AddAuthorFormModel author);
 
         public ICollection<AuthorsViewModel> PopulateAuthorsViewModel(string id);
 

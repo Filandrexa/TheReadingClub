@@ -13,6 +13,7 @@ using TheReadingClub.Services.BookServices;
 using TheReadingClub.Services.DBSeeder;
 using TheReadingClub.Services.FormModelServices;
 using TheReadingClub.Services.GenreServices;
+using TheReadingClub.Services.ModeratorServices;
 
 namespace TheReadingClub
 {
@@ -49,12 +50,13 @@ namespace TheReadingClub
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-            }); ;
+            });
 
             services.AddTransient<IBookServices, BookServices>();
             services.AddTransient<IAuthorServices, AuthorServices>();
             services.AddTransient<IGenreServices, GenreServices>();
             services.AddTransient<IAdminServices, AdminServices>();
+            services.AddTransient<IModeratorServices, ModeratorServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
