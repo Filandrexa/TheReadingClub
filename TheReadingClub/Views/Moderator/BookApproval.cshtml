@@ -1,0 +1,33 @@
+﻿@model List<BooksApprovalViewModel>
+
+<div class="container row">
+    @if (Model == null)
+    {
+        <h1>Nothing to Approve!</h1>
+    }
+    else
+    {
+        @foreach (var book in Model)
+        {
+            <div class="card col-lg-2" style="width: 18rem;">
+                <img class="card-img-top" src="@book.ImageURL" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                    <p>Title: @book.Title</p>
+                    <p>Author: @book.Author</p>
+                    <p>Release date: @book.ReleaseYear</p>
+                        Genres:
+                        @foreach (var genre in book.Genres)
+                        {
+                        <p>@genre.Name</p>
+                        }
+                        <p class="text-justify">
+                        @book.Description
+                        </p>
+                        <a class="btn btn-success" asp-controller="Moderator" asp-action="ApproveBook" asp-route-id="@book.Id" role="button">Approve</a>
+                        <a class="btn btn-danger" asp-controller="Moderator" asp-action="DeclineBook" asp-route-id="@book.Id" role="button">Decline</a>
+                    </div>
+            </div>
+        }
+    }
+</div>

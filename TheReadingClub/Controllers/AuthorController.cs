@@ -15,12 +15,14 @@ namespace TheReadingClub.Controllers
             this.authorServices = authorServices;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return View(new AddAuthorFormModel());
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddAuthorFormModel author)
         {
             if (!ModelState.IsValid)

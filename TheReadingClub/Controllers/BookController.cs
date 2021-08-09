@@ -20,6 +20,7 @@ namespace TheReadingClub.Controllers
             this.data = data;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             var model = new AddBookFormModel();
@@ -29,6 +30,7 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddBookFormModel model)
         {
             var addBook = bookServices.AddBook(model);

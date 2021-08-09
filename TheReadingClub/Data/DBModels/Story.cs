@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TheReadingClub.Data.DBModels
 {
     public class Story
     {
-        public int Id { get; set; }
+        public Story()
+        {
+            this.Id = new Guid().ToString();
+        }
+
+        public string Id { get; set; }
 
         [Required]
         public int UserId { get; set; }
@@ -12,5 +18,7 @@ namespace TheReadingClub.Data.DBModels
         public User User { get; set; }
 
         public string StoryDescription { get; set; }
+
+        public bool IsPublic { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace TheReadingClub.Controllers
 
         public IActionResult AuthorApproval()
         {
-            var model = moderatorServices.PopulateApprovalView();
+            var model = moderatorServices.PopulateAuthorApprovalView();
 
             return View(model);
         }
@@ -25,14 +25,35 @@ namespace TheReadingClub.Controllers
         {
             moderatorServices.ApproveAuthor(id);
 
-            return RedirectToAction("All", "Moderator");
+            return RedirectToAction("AuthorApproval", "Moderator");
         }
 
         public IActionResult DeclineAuthor(int id)
         {
             moderatorServices.DeclineAuthor(id);
 
-            return RedirectToAction("All", "Moderator");
+            return RedirectToAction("AuthorApproval", "Moderator");
+        }
+
+        public IActionResult BookApproval()
+        {
+            var model = moderatorServices.PopulateBookApprovalView();
+
+            return View(model);
+        }
+
+        public IActionResult ApproveBook(int id)
+        {
+            moderatorServices.ApproveBook(id);
+
+            return RedirectToAction("BookApproval", "Moderator");
+        }
+
+        public IActionResult DeclineBook(int id)
+        {
+            moderatorServices.DeclineBook(id);
+
+            return RedirectToAction("BookApproval", "Moderator");
         }
     }
 }

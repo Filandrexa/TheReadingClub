@@ -8,18 +8,21 @@
         @foreach (var book in Model.Books)
         {
             <a asp-controller="Book" asp-action="ById" asp-route-id="@book.Id">
-             @book.Title
-             </a>
-                <div>
-                    @foreach (var genre in book.Genre)
-                     {
-                        <table>
-                            <tr>@genre</tr>
-                        </table>
-                     }
-                </div>
+                @book.Title
+            </a>
+            <div>
+                @foreach (var genre in book.Genre)
+                {
+                    <table>
+                        <tr>@genre</tr>
+                    </table>
+                }
+            </div>
         }
-    <a class="btn btn-info" role="button" asp-controller="Author" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        @if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
+        {
+            <a class="btn btn-info" role="button" asp-controller="Author" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        }
     </div>
     </div>
 </div>

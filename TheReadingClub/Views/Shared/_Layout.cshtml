@@ -18,17 +18,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="Add">Add Author</a>
-                        </li>
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="All">All Authors</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Add">Add Book</a>
                         </li>
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="All">All Book</a>
@@ -36,12 +27,32 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Genre" asp-action="All">All Genres</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="PromoteUser">Admin</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Moderator" asp-action="AuthorApproval">Pending Approval</a>
-                        </li>
+                        @if (User != null)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="Add">Add Author</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Add">Add Book</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Moderator" asp-action="AuthorApproval">Pending Author Approval</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Moderator" asp-action="BookApproval">Pending Book Approval</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="PromoteUser">Admin</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

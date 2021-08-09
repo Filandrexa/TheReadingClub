@@ -26,7 +26,7 @@ namespace TheReadingClub.Services.BookServices
                 return false;
             }
 
-            var bookToAdd = new Data.DBModels.Book
+            var bookToAdd = new Data.DBModels.BookPendingApproval
             {
                 Title = book.Title,
                 Author = author,
@@ -47,7 +47,7 @@ namespace TheReadingClub.Services.BookServices
                 bookToAdd.Genres.Add(confirmGenre);
             }
 
-            data.Books.Add(bookToAdd);
+            data.BookPendingApprovals.Add(bookToAdd);
             data.SaveChanges();
             return true;
         }

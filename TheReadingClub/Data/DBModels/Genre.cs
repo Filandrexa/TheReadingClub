@@ -8,6 +8,7 @@ namespace TheReadingClub.Data.DBModels
         public Genre()
         {
             this.Books = new HashSet<Book>();
+            this.PendingApproval = new HashSet<BookPendingApproval>();
         }
 
         public int Id { get; set; }
@@ -17,5 +18,7 @@ namespace TheReadingClub.Data.DBModels
         public string Name { get; set; }
 
         public ICollection<Book> Books { get; set; }
+
+        public ICollection<BookPendingApproval> PendingApproval { get; set; }
     }
 }

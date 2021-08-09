@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheReadingClub.Data;
 
 namespace TheReadingClub.Data.Migrations
 {
     [DbContext(typeof(TheReadingClubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210809085905_EditBookPedingApproval")]
+    partial class EditBookPedingApproval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,21 +34,6 @@ namespace TheReadingClub.Data.Migrations
                     b.HasIndex("GenresId");
 
                     b.ToTable("BookGenre");
-                });
-
-            modelBuilder.Entity("BookPendingApprovalGenre", b =>
-                {
-                    b.Property<int>("GenresId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PendingApprovalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GenresId", "PendingApprovalId");
-
-                    b.HasIndex("PendingApprovalId");
-
-                    b.ToTable("BookPendingApprovalGenre");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -299,6 +286,9 @@ namespace TheReadingClub.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BookPendingApprovalId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -306,16 +296,17 @@ namespace TheReadingClub.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookPendingApprovalId");
+
                     b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("TheReadingClub.Data.DBModels.Story", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsPublic")
-                        .HasColumnType("bit");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("StoryDescription")
                         .HasColumnType("nvarchar(max)");
@@ -420,21 +411,6 @@ namespace TheReadingClub.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookPendingApprovalGenre", b =>
-                {
-                    b.HasOne("TheReadingClub.Data.DBModels.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheReadingClub.Data.DBModels.BookPendingApproval", null)
-                        .WithMany()
-                        .HasForeignKey("PendingApprovalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -508,6 +484,13 @@ namespace TheReadingClub.Data.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("TheReadingClub.Data.DBModels.Genre", b =>
+                {
+                    b.HasOne("TheReadingClub.Data.DBModels.BookPendingApproval", null)
+                        .WithMany("Genres")
+                        .HasForeignKey("BookPendingApprovalId");
+                });
+
             modelBuilder.Entity("TheReadingClub.Data.DBModels.Story", b =>
                 {
                     b.HasOne("TheReadingClub.Data.DBModels.User", "User")
@@ -520,6 +503,11 @@ namespace TheReadingClub.Data.Migrations
             modelBuilder.Entity("TheReadingClub.Data.DBModels.Author", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("TheReadingClub.Data.DBModels.BookPendingApproval", b =>
+                {
+                    b.Navigation("Genres");
                 });
 
             modelBuilder.Entity("TheReadingClub.Data.DBModels.User", b =>
