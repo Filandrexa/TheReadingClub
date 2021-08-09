@@ -1,16 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TheReadingClub.Data.DBModels
 {
     public class Story
     {
-        public Story()
-        {
-            this.Id = new Guid().ToString();
-        }
-
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public int UserId { get; set; }
