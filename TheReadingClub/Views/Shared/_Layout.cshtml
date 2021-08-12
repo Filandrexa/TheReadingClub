@@ -29,7 +29,7 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Genre" asp-action="All">All Genres</a>
                         </li>
-                        @if (User == null)
+                        @if (User != null)
                         {
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="Add">Add Author</a>

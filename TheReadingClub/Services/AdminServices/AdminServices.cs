@@ -47,7 +47,9 @@ namespace TheReadingClub.Services.AdminServices
                 return false;
             }
 
-            Task.Run(async () => await userManager.AddToRoleAsync(user, ModeratorRole));
+            Task.Run(async () => await userManager.AddToRoleAsync(user, ModeratorRole))
+                .GetAwaiter()
+                .GetResult();
 
             return true;
         }

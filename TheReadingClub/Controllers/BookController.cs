@@ -60,8 +60,7 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = AdminRole)]
-        [Authorize(Roles = ModeratorRole)]
+        [Authorize(Roles = AdminRole + ", " + ModeratorRole)]
         public IActionResult Edit(int id)
         {
             var model = bookServices.PopulateEditBookFormModel(id);
@@ -70,8 +69,7 @@ namespace TheReadingClub.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = AdminRole)]
-        [Authorize(Roles = ModeratorRole)]
+        [Authorize(Roles = AdminRole + ", " + ModeratorRole)]
         public IActionResult Edit(EditBookFormModel model)
         {
             if (!ModelState.IsValid)

@@ -5,8 +5,7 @@ using static TheReadingClub.ProjectConstants;
 
 namespace TheReadingClub.Controllers
 {
-    [Authorize(Roles = AdminRole)]
-    [Authorize(Roles = ModeratorRole)]
+    [Authorize(Roles = AdminRole + ", "+ ModeratorRole)]
     public class ModeratorController : Controller
     {
         private readonly IModeratorServices moderatorServices;
