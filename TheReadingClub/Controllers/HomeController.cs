@@ -19,5 +19,6 @@ namespace TheReadingClub.Controllers
             return View(model);
         }
 
+        public IActionResult Error() => View();
     }
 }
